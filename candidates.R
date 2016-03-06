@@ -18,20 +18,15 @@ names(data_list) <- c("Bernie Sanders", "Donald Trump", "Hillary Clinton",
 
 data <- plyr::ldply(data_list)
 
+
 data_ss <- data %>%
     mutate(year = lubridate::year(status_published),
            month = lubridate::month(status_published, label = T)) %>%
     group_by(year, month, .id) %>%
-    summarize(num = sum(num_likes) + sum(num_comments) + sum(num_shares))
-
-data %>%
-    group_by(.id) %>%
-    summarize(count = n())
-           
-              normalized_num = count) %>%
+    summarize(num = sum(num_likes) + sum(num_comments) + sum(num_shares)) %>%
     mutate(new_date = paste0(month, ", ", year)) %>%
     filter(year > 2013 & new_date != "Mar, 2016")
-str(data_ss)
+    
 data_ss$new_date <- factor(data_ss$new_date, levels=unique(data_ss$new_date))
 
 ggplot(data_ss, aes(x = new_date, y = num, color = .id)) +
