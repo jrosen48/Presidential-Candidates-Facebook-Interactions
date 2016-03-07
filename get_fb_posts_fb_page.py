@@ -12,8 +12,6 @@ page_id = "" # add page ID(i.e., for http://facebook.com/johnkasich the page ID 
 
 access_token = app_id + "|" + app_secret
 
-my_usable_token = "545636978929375|0aebbaa417979026785b6ea4eac22fb6"
-
 def request_until_succeed(url):
     req = urllib2.Request(url)
     success = False
